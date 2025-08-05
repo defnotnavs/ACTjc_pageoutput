@@ -7,29 +7,39 @@ const settings = {
   grammarCheck: true
 };
 
-console.log("All settings:");
+// Output function to append messages to the body
+const appendToBody = (message) => {
+  const outputDiv = document.createElement('div');
+  outputDiv.innerHTML = message;
+  document.body.appendChild(outputDiv);
+};
+
+// Task 1: List all enabled settings
+appendToBody("<strong>All Settings:</strong>");
 Object.entries(settings).forEach(([key, value]) => {
-  console.log(`${key}: ${value}`);
+  appendToBody(`${key}: ${value}`);
 });
 
-console.log("------------------------------------------------------");
+appendToBody("------------------------------------------------------");
 
+// Task 2: Count how many settings are set to true
 const trueCount = Object.values(settings).filter(v => v === true).length;
-console.log(`Number of enabled settings: ${trueCount}`);
+appendToBody(`<strong>Number of Enabled Settings:</strong> ${trueCount}`);
 
-console.log("------------------------------------------------------");
+appendToBody("------------------------------------------------------");
 
-const entries = Object.entries(settings);
-const enabledEntries = entries.filter(([key, value]) => value === true);
-console.log("Enabled settings array:");
+// Task 3: Convert settings to an array and filter based on values
+const enabledEntries = Object.entries(settings).filter(([key, value]) => value === true);
+appendToBody("<strong>Enabled Settings Array:</strong>");
 enabledEntries.forEach(([key, value]) => {
-  console.log(`${key}: ${value}`);
+  appendToBody(`${key}: ${value}`);
 });
 
-console.log("------------------------------------------------------");
+appendToBody("------------------------------------------------------");
 
+// Task 4: Rebuild the filtered settings object
 const enabledSettings = Object.fromEntries(enabledEntries);
-console.log("Rebuilt enabled settings object:");
+appendToBody("<strong>Rebuilt Enabled Settings Object:</strong>");
 Object.entries(enabledSettings).forEach(([key, value]) => {
-  console.log(`${key}: ${value}`);
+  appendToBody(`${key}: ${value}`);
 });

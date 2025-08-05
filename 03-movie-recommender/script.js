@@ -6,22 +6,34 @@ const movies = [
   { title: "Interstellar", genre: "Sci-Fi", rating: 8.6 }
 ];
 
-const ratings = movies.filter(movie => movie.rating >= 8);
-console.log("The movies that have ratings greater than or equal to 8 are:");
-ratings.forEach(movie=> {
-  console.log(`TITLE : ${movie.title} - GENRE : ${movie.genre} - RATINGS : ${movie.rating}`);
+// Output function to append messages to the body
+const appendToBody = (message) => {
+  const outputDiv = document.createElement('div');
+  outputDiv.innerHTML = message;
+  document.body.appendChild(outputDiv);
+};
+
+// Task 1: Display all movie titles in uppercase
+const upperCaseTitles = movies.map(movie => movie.title.toUpperCase());
+appendToBody("<strong>Movie Titles (Uppercase):</strong> " + upperCaseTitles.join(', '));
+
+// Task 2: Filter and display movies with rating ≥ 8
+const highRatedMovies = movies.filter(movie => movie.rating >= 8);
+appendToBody("<strong>Movies with Rating ≥ 8:</strong>");
+highRatedMovies.forEach(movie => {
+  appendToBody(`${movie.title} (${movie.genre}) - ${movie.rating} ⭐`);
 });
 
-console.log("------------------------------------------------------");
+// Task 3: Calculate the average rating using reduce()
+const totalRating = movies.reduce((sum, movie) => sum + movie.rating, 0);
+const averageRating = totalRating / movies.length;
+appendToBody(`<strong>Average Rating:</strong> ${averageRating.toFixed(2)} ⭐`);
 
-const movieList = movies.map(movie => 
-  `${movie.title} (${movie.genre}) - ${movie.rating} ⭐`
-);
-movieList.forEach(movie => console.log(movie));
-
-console.log("------------------------------------------------------");
-
-const recommend = (movie, minRating = 8) => movie.rating >= minRating;
+// Task 4: Function to display movie details using destructuring
+const displayMovie = ({ title, genre, rating }) => {
+  return `${title} (${genre}) - ${rating} ⭐`;
+};
+appendToBody("<strong>Movie Details:</strong>");
 movies.forEach(movie => {
-  console.log(`${movie.title}, recommended? : ${recommend(movie)}`);
+  appendToBody(displayMovie(movie));
 });

@@ -5,24 +5,37 @@ const cart = [
   { name: "Pencil", price: 10, quantity: 5 }
 ];
 
+// Output function to append messages to the body
+const appendToBody = (message) => {
+  const outputDiv = document.createElement('div');
+  outputDiv.innerHTML = message;
+  document.body.appendChild(outputDiv);
+};
+
+// Task 1: Calculate total price for each item
 const prices = cart.map(item => ({
   name: item.name,
   totalPrice: item.price * item.quantity
 }));
+
+appendToBody("<strong>Total Prices for Each Item:</strong>");
 prices.forEach(item => {
-  console.log(`${item.name} --- ₱${item.totalPrice}`);
+  appendToBody(`${item.name} --- ₱${item.totalPrice}`);
 });
 
-console.log("------------------------------------------------------");
+appendToBody("------------------------------------------------------");
 
+// Task 2: Generate a new array of item descriptions
 const descriptions = cart.map(item => `${item.name} - ₱${item.price}`);
+appendToBody("<strong>Item Descriptions:</strong>");
 descriptions.forEach(desc => {
-  console.log(desc);
+  appendToBody(desc);
 });
 
-console.log("------------------------------------------------------");
+appendToBody("------------------------------------------------------");
 
+// Task 3: Compute the total cart value using reduce()
 const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-console.log(`The total price is: ₱${totalPrice}`);
+appendToBody(`<strong>The total price is:</strong> ₱${totalPrice}`);
 
-console.log("------------------------------------------------------");
+appendToBody("------------------------------------------------------");
